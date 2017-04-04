@@ -52,4 +52,8 @@ void simulate(Circuit c, string input_filename)
   deque<output> outputs;
   
   
+  
+  return;
 }
+
+
