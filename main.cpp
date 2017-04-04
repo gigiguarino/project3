@@ -28,7 +28,7 @@ int main(int argc, char **argv)
       {
         string inFilename = string(argv[++i]);
         Circuit c(inFilename);
-        topologicalSort(c);
+        topological_sort(c);
       }
       else
       {

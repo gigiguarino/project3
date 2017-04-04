@@ -1,0 +1,34 @@
+.model subtractor
+
+.inputs a[0] b[0] 
+
+.outputs s[0] 
+
+.names ONE
+1
+
+.names b[0] b_inv[0]
+0 1
+
+.names s_h[0] dc
+1 1
+
+.names s_d[0] ONE s[0]
+10 1
+01 1
+
+.names a[0] b_inv[0] s_d[0]
+10 1
+01 1
+
+.names a[0] b_inv[0] s_e[0]
+11 1
+
+.names s_d[0] ONE s_f[0]
+11 1
+
+.names s_f[0] s_e[0] s_h[0]
+-1 1
+1- 1
+
+.end
