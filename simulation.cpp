@@ -241,7 +241,7 @@ deque<reg> find_nodes(Circuit c, deque<reg> nodes)
 // adds the new nodes to the old nodes
 deque<reg> add_new_nodes(deque<reg> old_nodes, deque<reg> new_nodes)
 {
-  for (int i = 0; i < int(nodes.size()); i++)
+  for (int i = 0; i < int(new_nodes.size()); i++)
   {
     // only adds the node if it isn't already in the deque
     if (!has_node(old_nodes, new_nodes[i].name))

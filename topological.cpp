@@ -79,11 +79,11 @@ bool check_sort(vector<Node*> all_nodes, deque<string> sorted_nodes)
   
   for (int i = 0; i < int(all_nodes.size()); i++)
   {
-    current_fanin = all_nodes[i].getFanin();
-    current_node_name = all_nodes[i].getName();
+    current_fanin = all_nodes[i]->getFanin();
+    current_node_name = all_nodes[i]->getName();
     for (int j = 0; j < int(current_fanin.size()); j++)
     {
-      current_fanin_name = current_fanin.getName();
+      current_fanin_name = current_fanin[i]->getName();
       if (!comes_before(current_fanin_name, current_node_name, sorted_nodes))
       {
         return false;
