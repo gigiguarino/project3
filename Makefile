@@ -4,7 +4,7 @@
 #   >make clean	   #
 ####################
 
-FILES =  truthTable.cpp circuit.cpp main.cpp
+FILES =  truthTable.cpp circuit.cpp main.cpp simulation.cpp topological.cpp
 
 all: 
 	g++ -O3 -Wall -lm -g -o project3 ${FILES}

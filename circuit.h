@@ -15,8 +15,6 @@
 using namespace std;
 
 #include "node.h"
-#include "topological.h"
-#include "simulation.h"
 
 typedef map<string,Node*>::iterator mapIter;
 class Circuit
@@ -41,7 +39,10 @@ class Circuit
     // get and set the name of the circuit
     string getName() { return name; }
     int setName(const string &modelName) { name = modelName; return 0; }
-    
+  
+    // get internal nodes
+    vector<Node*> getInternalNodes();
+  
     // get primary inputs and outputs
     vector<Node*> getPIs();
     vector<Node*> getPOs();

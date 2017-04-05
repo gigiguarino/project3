@@ -51,7 +51,10 @@ class TruthTable
     
     // returns number of variables (columns)
     unsigned getNumVars();
-    
+  
+    // returns the logic table
+    vector<vector<truthType> > getLogic();
+  
     // prints the contents of the table
     int print();
     

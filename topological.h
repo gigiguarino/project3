@@ -1,7 +1,12 @@
 
 #include <string>
 #include <deque>
+#include <vector>
 #include <iostream>
+
+#include "circuit.h"
+#include "node.h"
+#include "truthTable.h"
 
 using namespace std;
 

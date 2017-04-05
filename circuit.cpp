@@ -7,6 +7,17 @@ Circuit::~Circuit()
   clear();
 }
 
+vector<Node*> Circuit::getInternalNodes()
+{
+  vector<Node*> Is;
+  for (mapIter it = nodeMap.begin(); it != nodeMap.end(); it++)
+  {
+    if (it->second->type == INTERNAL)
+      Is.push_back(it->second);
+  }
+  return Is;
+}
+
 vector<Node*> Circuit::getPIs()
 {
   vector<Node*> PIs;
@@ -137,7 +148,7 @@ int Circuit::readBLIF(const string &filename)
   string line;
   while (getline(inFile, line))
   {
-//    cout << "processing line: " << line << endl;
+    //cout << "processing line: " << line << endl;
     stringstream sstr;
     // skip empty lines
     if (line.length() == 0) continue;
@@ -224,7 +235,7 @@ int Circuit::readBLIF(const string &filename)
         {
           string entry, result;
           inFile >> entry >> result;
-//          cout << entry << " " << result << endl;
+          // cout << entry << " " << result << endl;
           if (entry.length() != outNode->getNumFanin())
           {
             cout << "ERROR in readBLIF() - number of input entries "
@@ -244,7 +255,7 @@ int Circuit::readBLIF(const string &filename)
           }
           getline(inFile, result);
           c = inFile.peek(); // look at next character
-//          cout << "c: " << c << endl;
+          //cout << "c: " << c << endl;
         } while (c == '1' || c == '0' || c == '-');
       }
       

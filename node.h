@@ -41,6 +41,9 @@ class Node
     // returns and sets the type of the node
     nodeType getType() { return type; }
     int setType(nodeType t) { type = t; return 0; }
+  
+    // returns truth table
+    TruthTable getTT() { return tt; }
     
     // returns the vector of fanin nodes
     vector<Node*> getFanin() { return fanin; }

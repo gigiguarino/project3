@@ -48,6 +48,11 @@ unsigned TruthTable::getNumVars()
   return numVars;
 }
 
+vector<vector<truthType> > TruthTable::getLogic()
+{
+  return logic;
+}
+
 int TruthTable::print()
 {
   for (unsigned i = 0; i < logic.size(); ++i)
