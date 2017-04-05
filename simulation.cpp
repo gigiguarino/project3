@@ -1,11 +1,12 @@
 
 #include "simulation.h"
 
-// TO DO:
+// TO DO MAYBE:
 // make some sort of structure that can hold every node and its value
 // this way i can just look up nodes and get their values easily
 
-
+// gets the inputs from the input file
+// create a deque with their values and names
 deque<reg> get_inputs(string input_filename)
 {
   string in_name;
@@ -35,6 +36,7 @@ deque<reg> get_inputs(string input_filename)
   return inputs;
 }
 
+// prints the final output deque and their values
 void print_outputs(deque<reg> outputs)
 {
   cout << "*** Outputs:" << endl;
@@ -51,6 +53,8 @@ void print_outputs(deque<reg> outputs)
   return;
 }
 
+// returns true if the deque contains the node
+// with the same name
 bool has_node(deque<reg> nodes, string name)
 {
   for (int i = 0; i < int(nodes.size()); i++)
@@ -64,6 +68,8 @@ bool has_node(deque<reg> nodes, string name)
   return false;
 }
 
+// returns the value of the node in the deque
+// with the same name
 int get_value(deque<reg> nodes, string name)
 {
   for (int i = 0; i < int(nodes.size()); i++)
@@ -78,6 +84,8 @@ int get_value(deque<reg> nodes, string name)
   return 0;
 }
 
+// returns the whole reg with the same name
+// in the node deque
 reg get_reg(deque<reg> nodes, string name)
 {
   for (int i = 0; i < int(nodes.size()); i++)
@@ -94,6 +102,8 @@ reg get_reg(deque<reg> nodes, string name)
   return empty;
 }
 
+// finds the value of the entry in the truth table
+// that corresponds to the binary string given
 int find_tt_entry(string entry, TruthTable tt)
 {
   vector<vector<truthType> > logic = tt.getLogic();
@@ -146,6 +156,8 @@ int find_tt_entry(string entry, TruthTable tt)
   return 0;
 }
 
+// makes a binary string of the inputs and their values
+// finds it in the truth table and gets the value
 int get_value(deque<string> inputs, TruthTable tt, deque<reg> nodes)
 {
   // since i add the fanin inputs from the Node* vector into the
@@ -172,6 +184,7 @@ int get_value(deque<string> inputs, TruthTable tt, deque<reg> nodes)
   return find_tt_entry(entry, tt);
 }
 
+// creates a deque of strings for all of the nodes
 deque<string> create_string_deque(vector<Node*> fanin, deque<reg> nodes)
 {
   deque<string> return_deque;
@@ -184,6 +197,7 @@ deque<string> create_string_deque(vector<Node*> fanin, deque<reg> nodes)
   return return_deque;
 }
 
+// finds new nodes in the circuit that we are able to get the value of
 deque<reg> find_nodes(Circuit c, deque<reg> nodes)
 {
   // based on the values we have in our node deque
@@ -224,19 +238,71 @@ deque<reg> find_nodes(Circuit c, deque<reg> nodes)
   return new_nodes;
 }
 
+// adds the new nodes to the old nodes
+deque<reg> add_new_nodes(deque<reg> old_nodes, deque<reg> new_nodes)
+{
+  for (int i = 0; i < int(nodes.size()); i++)
+  {
+    // only adds the node if it isn't already in the deque
+    if (!has_node(old_nodes, new_nodes[i].name))
+    {
+      old_nodes.push_back(new_nodes[i]);
+    }
+  }
+  
+  return old_nodes;
+}
+
+// returns true if we have all of the output nodes in our nodes deque
+// indicating we can finish
+bool has_all_output_nodes(deque<reg> nodes, deque<string> output_names)
+{
+  for (int i = 0; i < int(output_names.size()); i++)
+  {
+    if (!has_node(nodes, output_names[i]))
+    {
+      return false;
+    }
+  }
+  
+  return true;
+}
+
+// creates the output nodes from the nodes in the deque
+deque<reg> create_output_nodes(deque<reg> nodes, deque<string> output_names)
+{
+  deque<reg> return_deque;
+  for (int i = 0; i < (output_names.size()); i++)
+  {
+    return_deque.push_back(get_reg(nodes, output_names[i]));
+  }
+  
+  return return_deque;
+}
+
+// simulates the circuit with the inputs given in the input file
 void simulate(Circuit c, string input_filename)
 {
-  deque<reg> inputs = get_inputs(input_filename);
-  deque<reg> intermediate;
+  deque<reg> nodes = get_inputs(input_filename);
+  deque<reg> new_nodes;
   deque<reg> outputs;
+  
+  deque<string> output_names;
   
   bool done = false;
   
   while (!done)
   {
-    
+    new_nodes = find_nodes(c, nodes);
+    nodes = add_new_nodes(nodes, new_nodes);
+    if (has_all_output_nodes(nodes, output_names))
+    {
+      done = true;
+    }
   }
   
+  outputs = create_output_nodes(nodes, output_names);
+  print_outputs(outputs);
   
   return;
 }

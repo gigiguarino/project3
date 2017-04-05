@@ -7,6 +7,17 @@ Circuit::~Circuit()
   clear();
 }
 
+vector<Node*> Circuit::getAllNodes()
+{
+  vector<Node*> nodes;
+  for (mapIter it = nodeMap.begin(); it != nodeMap.end(); it++)
+  {
+    nodes.push_back(it->second);
+  }
+  
+  return nodes;
+}
+
 vector<Node*> Circuit::getInternalNodes()
 {
   vector<Node*> Is;

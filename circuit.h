@@ -40,6 +40,9 @@ class Circuit
     string getName() { return name; }
     int setName(const string &modelName) { name = modelName; return 0; }
   
+    // get all nodes
+    vector<Node*> getAllNodes();
+  
     // get internal nodes
     vector<Node*> getInternalNodes();
   
