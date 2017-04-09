@@ -1,9 +1,6 @@
 
 #include "simulation.h"
 
-// TO DO MAYBE:
-// make some sort of structure that can hold every node and its value
-// this way i can just look up nodes and get their values easily
 
 // gets the inputs from the input file
 // create a deque with their values and names
