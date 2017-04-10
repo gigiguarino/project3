@@ -1,0 +1,1 @@
+g++ -O3 -Wall -lm -g -o project3 truthTable.cpp circuit.cpp main.cpp simulation.cpp topological.cpp

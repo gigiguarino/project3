@@ -7,6 +7,18 @@ Circuit::~Circuit()
   clear();
 }
 
+vector<Node*> Circuit::getSpecificNodes()
+{
+  vector<Node*> nodes;
+  for (mapIter it = nodeMap.begin(); it != nodeMap.end(); it++)
+  {
+    if (it->second->type != PRIMARY_INPUT)
+      nodes.push_back(it->second);
+  }
+  
+  return nodes;
+}
+
 vector<Node*> Circuit::getAllNodes()
 {
   vector<Node*> nodes;
@@ -145,7 +157,7 @@ int Circuit::print()
 
 int Circuit::readBLIF(const string &filename)
 {
-  cout << "reading file " << filename << "..." << endl;
+  //cout << "reading file " << filename << "..." << endl;
   ifstream inFile(filename.c_str());
   if (!inFile.good())
   {
@@ -305,7 +317,7 @@ int Circuit::readBLIF(const string &filename)
     }
   }
   
-  cout << "file " << filename << " successfully read." << endl;
+  //cout << "file " << filename << " successfully read." << endl;
   inFile.close();
   return 0;
 }

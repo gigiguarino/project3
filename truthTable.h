@@ -53,7 +53,7 @@ class TruthTable
     unsigned getNumVars();
   
     // returns the logic table
-    vector<vector<truthType> > getLogic();
+    vector<string> getLogicString();
   
     // prints the contents of the table
     int print();

@@ -1,0 +1,4 @@
+reading file add_blifs/add6.blif...
+file add_blifs/add6.blif successfully read.
+*** Outputs:
+cout = 0, s[0] = 0, s[1] = 0, s[2] = 1, s[3] = 0, s[4] = 1, s[5] = 1

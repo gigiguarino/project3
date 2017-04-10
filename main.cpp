@@ -30,7 +30,8 @@ int main(int argc, char **argv)
       {
         string inFilename = string(argv[++i]);
         Circuit c(inFilename);
-        topological_sort(c);
+        vector<Node*> all_nodes = c.getAllNodes();
+        topological_sort(all_nodes);
       }
       
       else
@@ -47,7 +48,9 @@ int main(int argc, char **argv)
         string inFilename = string(argv[++i]);
         Circuit c(inFilename);
         string inputFile(argv[++i]);
-        simulate(c, inputFile);
+        vector<Node*> all_nodes = c.getSpecificNodes();
+        vector<Node*> POs = c.getPOs();
+        simulate(all_nodes, inputFile, POs);
       }
       
       else
@@ -55,6 +58,12 @@ int main(int argc, char **argv)
         cout << "option -simulate requires two additional arguments." << endl;
         usage(argv[0]);
       }
+    }
+    
+    else
+    {
+      cout << "unrecognized command." << endl;
+      usage(argv[0]);
     }
   }
   

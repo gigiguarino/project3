@@ -48,9 +48,31 @@ unsigned TruthTable::getNumVars()
   return numVars;
 }
 
-vector<vector<truthType> > TruthTable::getLogic()
+vector<string> TruthTable::getLogicString()
 {
-  return logic;
+  string current;
+  vector<string> return_vec;
+  
+  for (unsigned i = 0; i < logic.size(); ++i)
+  {
+    current = "";
+    
+    for (unsigned j = 0; j < logic[i].size(); ++j)
+    {
+      switch(logic[i][j])
+      {
+        case ZERO: current += "0"; break;
+        case ONE:  current += "1"; break;
+        case DC:   current += "-"; break;
+        default:
+          break;
+      }
+    }
+    
+    return_vec.push_back(current);
+  }
+  
+  return return_vec;
 }
 
 int TruthTable::print()

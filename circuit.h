@@ -40,6 +40,10 @@ class Circuit
     string getName() { return name; }
     int setName(const string &modelName) { name = modelName; return 0; }
   
+    // get all nodes except primary inputs
+    // and one nodes and zero nodes
+    vector<Node*> getSpecificNodes();
+  
     // get all nodes
     vector<Node*> getAllNodes();
   

@@ -1,0 +1,4 @@
+reading file mult_blifs/mult5.blif...
+file mult_blifs/mult5.blif successfully read.
+*** Outputs:
+s[0] = 1, s[1] = 1, s[2] = 0, s[3] = 1, s[4] = 0, s[5] = 0, s[6] = 1, s[7] = 0, s[8] = 0, s[9] = 0

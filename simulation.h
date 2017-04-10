@@ -3,6 +3,7 @@
 #include <deque>
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 #include "circuit.h"
 #include "node.h"
@@ -43,11 +44,11 @@ int get_value(deque<string> inputs, TruthTable tt, deque<reg> nodes);
 
 // creates a deque of strings from the deque of nodes
 // a deque of all the node names
-deque<string> create_string_deque(vector<Node*> fanin, deque<reg> nodes);
+deque<string> create_string_deque(vector<Node*> fanin);
 
 // loops through the circuit and finds as many node values as possible
 // until we have all the output node's values
-deque<reg> find_nodes(Circuit c, deque<reg> nodes);
+deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes);
 
 // add the new nodes we have found into the larger node deque
 deque<reg> add_new_nodes(deque<reg> old_nodes, deque<reg> new_nodes);
@@ -58,5 +59,8 @@ bool has_all_output_nodes(deque<reg> nodes, deque<string> output_names);
 // creates a deque of output nodes from their names in the output names string
 deque<reg> create_output_nodes(deque<reg> nodes, deque<string> output_names);
 
+// prints the names and values of the nodes
+void print_nodes(deque<reg> nodes);
+
 // simulates circuit c with the inputs declared in the input file
-void simulate(Circuit c, string input_filename);
+void simulate(vector<Node*> all_nodes, string input_filename, vector<Node*> POs);

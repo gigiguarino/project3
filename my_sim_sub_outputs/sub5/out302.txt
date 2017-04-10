@@ -1,0 +1,4 @@
+reading file sub_blifs/sub5.blif...
+file sub_blifs/sub5.blif successfully read.
+*** Outputs:
+s[0] = 0, s[1] = 0, s[2] = 1, s[3] = 0, s[4] = 0
