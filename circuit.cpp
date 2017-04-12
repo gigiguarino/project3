@@ -157,7 +157,7 @@ int Circuit::print()
 
 int Circuit::readBLIF(const string &filename)
 {
-  //cout << "reading file " << filename << "..." << endl;
+  cout << "reading file " << filename << "..." << endl;
   ifstream inFile(filename.c_str());
   if (!inFile.good())
   {
@@ -317,7 +317,7 @@ int Circuit::readBLIF(const string &filename)
     }
   }
   
-  //cout << "file " << filename << " successfully read." << endl;
+  cout << "file " << filename << " successfully read." << endl;
   inFile.close();
   return 0;
 }
