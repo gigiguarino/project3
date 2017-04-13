@@ -35,12 +35,20 @@ deque<reg> get_inputs(string input_filename)
   return inputs;
 }
 
+deque<reg> sort_outputs(deque<reg> in_deque)
+{
+  deque<reg> out_deque;
+  for (int i = 0); i < int(in_deque.size()); i++)
+  {
+    
+  }
+  return out_deque;
+}
+
 // prints the final output deque and their values
 void print_outputs(deque<reg> outputs)
 {
   cout << "*** Outputs:" << endl;
-  
-  cout << outputs.size() << endl;
 
   for (int i = 0; i < int(outputs.size()); i++)
   {
@@ -318,6 +326,18 @@ void print_nodes(deque<reg> nodes)
   return;
 }
 
+// print output names
+// used for debugging
+void print_output_names(deque<string> output_names)
+{
+  for (int i = 0; i < int(output_names.size()); i++)
+  {
+    cout << output_names[i] <<< endl;
+  }
+  
+  return;
+}
+
 deque<reg> add_ones_zeros(vector<Node*> all_nodes)
 {
   deque<reg> return_deque;
@@ -365,7 +385,6 @@ void simulate(vector<Node*> all_nodes, string input_filename, vector<Node*> POs)
   
   while (!done)
   {
-    cout << endl;
     new_nodes = find_nodes(all_nodes, nodes);
     nodes = add_new_nodes(nodes, new_nodes, num_output_nodes_obtained, output_names);
     if (num_output_nodes_obtained == num_output_nodes)

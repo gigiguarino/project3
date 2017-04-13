@@ -66,5 +66,8 @@ deque<reg> create_output_nodes(deque<reg> nodes, deque<string> output_names);
 // prints the names and values of the nodes
 void print_nodes(deque<reg> nodes);
 
+// prints the names of the output nodes
+void print_output_names(deque<string> output_names);
+
 // simulates circuit c with the inputs declared in the input file
 void simulate(vector<Node*> all_nodes, string input_filename, vector<Node*> POs);
