@@ -6,6 +6,7 @@
 #include <sstream>
 #include <cassert>
 #include <deque>
+#include <cstdlib>
 using namespace std;
 
 
@@ -79,7 +80,8 @@ int bin2dec_signed(deque<int> binary, int numbits)
 int main(int argc, char *argv[])
 {
   // inputs will be two files
-  // one of them will be the input which we will need to calculate the correct output
+  // one of them will be the input which we will 
+  // need to calculate the correct output
   // the other will be the output we got from running the program
   // we will output "FAILED" if this ever fails
   // we will output nothing if it passes
@@ -91,8 +93,10 @@ int main(int argc, char *argv[])
   string file1 = argv[3];
   string file2 = argv[4];
   
-  ifstream infile1(file1);
-  ifstream infile2(file2);
+  ifstream infile1;
+  infile1.open(file1.c_str());
+  ifstream infile2;
+  infile2.open(file2.c_str());
   
   string trash;
   int bit = 0;
@@ -256,6 +260,9 @@ int main(int argc, char *argv[])
   {
     cout << "FAILED" << endl;
   }
-  
+
+  infile1.close();
+  infile2.close();
+
   return 0;
 }

@@ -12,7 +12,8 @@ deque<reg> get_inputs(string input_filename)
   reg current_input;
   deque<reg> inputs;
   
-  ifstream infile(input_filename);
+  ifstream infile;
+  infile.open(input_filename.c_str());
   
   while (infile >> in_name >> in_val)
   {
@@ -31,7 +32,8 @@ deque<reg> get_inputs(string input_filename)
     
     inputs.push_back(current_input);
   }
-  
+
+  infile.close();  
   return inputs;
 }
 
@@ -313,7 +315,7 @@ bool has_all_output_nodes(deque<reg> nodes, deque<string> output_names)
 deque<reg> create_output_nodes(deque<reg> nodes, deque<string> output_names)
 {
   deque<reg> return_deque;
-  for (int i = 0; i < (output_names.size()); i++)
+  for (int i = 0; i < int(output_names.size()); i++)
   {
     return_deque.push_back(get_reg(nodes, output_names[i]));
   }
