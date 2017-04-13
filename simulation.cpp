@@ -200,7 +200,6 @@ deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes)
   // if all of an internal node's fanin nodes are covered by our nodes deque
   // then we can get its value and add it to our internal deque
   
-  cout << all_nodes.size() << endl;
   for (int i = 0; i < int(all_nodes.size()); i++)
   {
     vector<Node*> current_inputs = all_nodes[i]->getFanin();
@@ -226,13 +225,9 @@ deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes)
         current_node.value = get_value(current_node.inputs, theTT, nodes);
         new_nodes.push_back(current_node);
         index_to_remove.push_back(i);
-        //cout << all_nodes[i]->getName() << endl;
       }
     }
   }
-  //cout << endl;
-  //print_nodes(nodes);
-  //cout << endl;
   
   int current_index = 0;
   while (!index_to_remove.empty())
