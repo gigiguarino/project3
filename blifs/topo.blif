@@ -1,0 +1,29 @@
+.model topo
+
+.inputs a[0] b[0] b[1] b[2] b[3]
+
+.outputs c[0] c[1] c[2] c[3] c[4] c[5]
+
+.names a[0] c[3] c[5]
+10 1
+01 1
+
+.names a[0] c[2] c[4]
+11 1
+00 1
+
+.names a[0] b[3] c[3]
+11 1
+00 1
+
+.names a[0] b[2] c[2]
+10 1
+01 1
+
+.names a[0] b[1] c[1]
+00 1
+
+.names a[0] b[0] c[0]
+11 1
+
+.end
