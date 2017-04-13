@@ -4,36 +4,13 @@ make clean
 make
 
 # add blifs
-for i in {1..16}
+for i in {1..32}
 do
-if [[ $(./project3 -topoSort blifs/add_blifs/add$i.blif) ]]
-then
-echo "FAILED add$i.blif"
-fi
+echo "testing add $i..."
+./project3 -topoSort blifs/add_blifs/add$i.blif
+echo ""
+echo ""
 done
 
-echo "finished with adds"
+echo "finished :-)"
 
-# sub blifs
-for i in {1..16}
-do
-if [[ $(./project3 -topoSort blifs/sub_blifs/sub$i.blif) ]]
-then
-echo "FAILED sub$i.blif"
-fi
-done
-
-echo "finished with subs"
-
-# mult blifs
-for i in {1..16}
-do
-echo "mult $i ..."
-if [[ $(./project3 -topoSort blifs/mult_blifs/mult$i.blif) ]]
-then
-echo "FAILED mult$i.blif"
-fi
-done
-
-echo "finished with mults"
-echo "done :-)"
