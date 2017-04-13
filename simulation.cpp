@@ -205,14 +205,12 @@ deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes)
   {
     vector<Node*> current_inputs = all_nodes[i]->getFanin();
     add = true;
-    cout << "FIND NODES LOOP 1" << endl;
     
     if (all_nodes[i]->getType() != ONE_NODE &&
         all_nodes[i]->getType() != ZERO_NODE)
     {
       for (int j = 0; j < int(current_inputs.size()); j++)
       {
-        cout << "FIND NODES LOOP 2" << endl;
         if (!has_node(nodes, current_inputs[j]->getName()))
         {
           add = false;
@@ -239,7 +237,6 @@ deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes)
   int current_index = 0;
   while (!index_to_remove.empty())
   {
-    cout << "REMOVING INDICES" << endl;
     current_index = index_to_remove.front();
     index_to_remove.pop_front();
     all_nodes.erase(all_nodes.begin() + current_index);
@@ -273,8 +270,6 @@ deque<reg> add_new_nodes(deque<reg> old_nodes, deque<reg> new_nodes,
 {
   for (int i = 0; i < int(new_nodes.size()); i++)
   {
-    cout << "ADDING NEW NODES" << endl; 
-    
     // only adds the node if it isn't already in the deque
     if (!has_node(old_nodes, new_nodes[i].name))
     {
@@ -375,7 +370,6 @@ void simulate(vector<Node*> all_nodes, string input_filename, vector<Node*> POs)
   
   while (!done)
   {
-    cout << "WHILE !DONE" << endl;
     cout << endl;
     new_nodes = find_nodes(all_nodes, nodes);
     nodes = add_new_nodes(nodes, new_nodes, num_output_nodes_obtained, output_names);
