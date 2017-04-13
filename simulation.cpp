@@ -40,6 +40,8 @@ void print_outputs(deque<reg> outputs)
 {
   cout << "*** Outputs:" << endl;
   
+  cout << outputs.size() << endl;
+
   for (int i = 0; i < int(outputs.size()); i++)
   {
     cout << outputs[i].name << " = ";
@@ -198,20 +200,23 @@ deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes)
   // if all of an internal node's fanin nodes are covered by our nodes deque
   // then we can get its value and add it to our internal deque
   
+  cout << all_nodes.size() << endl;
   for (int i = 0; i < int(all_nodes.size()); i++)
   {
     vector<Node*> current_inputs = all_nodes[i]->getFanin();
     add = true;
-    cout << all_nodes[i]->getName() << endl;
+    cout << "FIND NODES LOOP 1" << endl;
     
     if (all_nodes[i]->getType() != ONE_NODE &&
         all_nodes[i]->getType() != ZERO_NODE)
     {
       for (int j = 0; j < int(current_inputs.size()); j++)
       {
+        cout << "FIND NODES LOOP 2" << endl;
         if (!has_node(nodes, current_inputs[j]->getName()))
         {
           add = false;
+          break;
         }
       }
       
@@ -227,13 +232,14 @@ deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes)
       }
     }
   }
-  cout << endl;
-  print_nodes(nodes);
-  cout << endl;
+  //cout << endl;
+  //print_nodes(nodes);
+  //cout << endl;
   
   int current_index = 0;
   while (!index_to_remove.empty())
   {
+    cout << "REMOVING INDICES" << endl;
     current_index = index_to_remove.front();
     index_to_remove.pop_front();
     all_nodes.erase(all_nodes.begin() + current_index);
@@ -247,15 +253,36 @@ deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes)
   return new_nodes;
 }
 
+// checks if the name is the name of an output node
+bool is_output(string name, deque<string> output_names)
+{
+  for (int i = 0; i < int(output_names.size()); i++)
+  {
+    if (output_names[i] == name)
+    {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 // adds the new nodes to the old nodes
-deque<reg> add_new_nodes(deque<reg> old_nodes, deque<reg> new_nodes)
+deque<reg> add_new_nodes(deque<reg> old_nodes, deque<reg> new_nodes, 
+  int &num_output_nodes, deque<string> output_names)
 {
   for (int i = 0; i < int(new_nodes.size()); i++)
   {
+    cout << "ADDING NEW NODES" << endl; 
+    
     // only adds the node if it isn't already in the deque
     if (!has_node(old_nodes, new_nodes[i].name))
     {
       old_nodes.push_back(new_nodes[i]);
+      if (is_output(new_nodes[i].name, output_names))
+      {
+        num_output_nodes += 1;
+      }
     }
   }
   
@@ -332,21 +359,27 @@ void simulate(vector<Node*> all_nodes, string input_filename, vector<Node*> POs)
   deque<reg> new_nodes;
   deque<reg> outputs;
   
+  int num_output_nodes = int(POs.size());
+  int num_output_nodes_obtained = 0;
+  
   // create a deque of the output node's names
   deque<string> output_names = create_string_deque(POs);
   
   // add all one nodes and zero nodes into the nodes deque
   // because we already know their values
   new_nodes = add_ones_zeros(all_nodes);
-  nodes = add_new_nodes(nodes, new_nodes);
+  nodes = add_new_nodes(nodes, new_nodes, num_output_nodes_obtained, output_names);
   
+
   bool done = false;
   
   while (!done)
   {
+    cout << "WHILE !DONE" << endl;
+    cout << endl;
     new_nodes = find_nodes(all_nodes, nodes);
-    nodes = add_new_nodes(nodes, new_nodes);
-    if (has_all_output_nodes(nodes, output_names))
+    nodes = add_new_nodes(nodes, new_nodes, num_output_nodes_obtained, output_names);
+    if (num_output_nodes_obtained == num_output_nodes)
     {
       done = true;
     }

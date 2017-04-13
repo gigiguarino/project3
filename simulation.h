@@ -50,8 +50,12 @@ deque<string> create_string_deque(vector<Node*> fanin);
 // until we have all the output node's values
 deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes);
 
+// checks if string is the name of an output node
+bool is_output(string name, deque<string> output_names);
+
 // add the new nodes we have found into the larger node deque
-deque<reg> add_new_nodes(deque<reg> old_nodes, deque<reg> new_nodes);
+deque<reg> add_new_nodes(deque<reg> old_nodes, deque<reg> new_nodes, 
+    int &num_output_nodes, deque<string> output_names);
 
 // returns true if we have all output nodes in the deque
 bool has_all_output_nodes(deque<reg> nodes, deque<string> output_names);

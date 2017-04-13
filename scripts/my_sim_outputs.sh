@@ -1,6 +1,7 @@
 #!/bin/sh
 MAXBITS=6
-
+cd ..
+cd outputs
 cd my_sim_add_outputs
 for i in $(seq 1 $MAXBITS)
 do
@@ -25,6 +26,7 @@ done
 cd ..
 echo "done removing outputs"
 
+cd ..
 make clean
 make
 
@@ -36,8 +38,8 @@ NUM=$(echo "(2 ^ (2*$i)) - 1" |bc)
 for j in $(seq 0 $NUM)
 do
 echo "add$i #$j"
-echo >> my_sim_add_outputs/add$i/out$j.txt
-./project3 -simulate add_blifs/add$i.blif add_inputs/add$i/add$j.txt > my_sim_add_outputs/add$i/out$j.txt
+echo >> outputs/my_sim_add_outputs/add$i/out$j.txt
+./project3 -simulate blifs/add_blifs/add$i.blif inputs/add_inputs/add$i/add$j.txt > outputs/my_sim_add_outputs/add$i/out$j.txt
 done
 done
 
@@ -49,8 +51,8 @@ NUM=$(echo "(2 ^ (2*$i)) - 1" |bc)
 for j in $(seq 0 $NUM)
 do
 echo "sub$i #$j"
-echo >> my_sim_sub_outputs/sub$i/out$j.txt
-./project3 -simulate sub_blifs/sub$i.blif sub_inputs/sub$i/sub$j.txt > my_sim_sub_outputs/sub$i/out$j.txt
+echo >> outputs/my_sim_sub_outputs/sub$i/out$j.txt
+./project3 -simulate blifs/sub_blifs/sub$i.blif inputs/sub_inputs/sub$i/sub$j.txt > outputs/my_sim_sub_outputs/sub$i/out$j.txt
 done
 done
 
@@ -62,7 +64,7 @@ NUM=$(echo "(2 ^ (2*$i)) - 1" |bc)
 for j in $(seq 0 $NUM)
 do
 echo "mult$i #$j"
-echo >> my_sim_mult_outputs/mult$i/out$j.txt
-./project3 -simulate mult_blifs/mult$i.blif mult_inputs/mult$i/mult$j.txt > my_sim_mult_outputs/mult$i/out$j.txt
+echo >> outputs/my_sim_mult_outputs/mult$i/out$j.txt
+./project3 -simulate blifs/mult_blifs/mult$i.blif inputs/mult_inputs/mult$i/mult$j.txt > outputs/my_sim_mult_outputs/mult$i/out$j.txt
 done
 done
