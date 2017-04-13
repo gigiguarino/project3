@@ -1,12 +1,12 @@
 #!/bin/sh
-
+cd ..
 make clean
 make
 
 # add blifs
 for i in {1..16}
 do
-if [[ $(./project3 -topoSort add_blifs/add$i.blif) ]]
+if [[ $(./project3 -topoSort blifs/add_blifs/add$i.blif) ]]
 then
 echo "FAILED add$i.blif"
 fi
@@ -17,7 +17,7 @@ echo "finished with adds"
 # sub blifs
 for i in {1..16}
 do
-if [[ $(./project3 -topoSort sub_blifs/sub$i.blif) ]]
+if [[ $(./project3 -topoSort blifs/sub_blifs/sub$i.blif) ]]
 then
 echo "FAILED sub$i.blif"
 fi
@@ -29,7 +29,7 @@ echo "finished with subs"
 for i in {1..16}
 do
 echo "mult $i ..."
-if [[ $(./project3 -topoSort mult_blifs/mult$i.blif) ]]
+if [[ $(./project3 -topoSort blifs/mult_blifs/mult$i.blif) ]]
 then
 echo "FAILED mult$i.blif"
 fi

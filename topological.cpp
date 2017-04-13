@@ -195,14 +195,14 @@ void topological_sort(vector<Node*> all_nodes)
   
   if (check_sort(all_nodes, sorted_nodes))
   {
-    //print_sorted(sorted_nodes);
+    print_sorted(sorted_nodes);
     return;
   }
   
   else
   {
     //print_sorted(sorted_nodes);
-    cerr << "failed." << endl;
+    cerr << "failed. :/" << endl;
     return;
   }
 }

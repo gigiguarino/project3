@@ -35,16 +35,6 @@ deque<reg> get_inputs(string input_filename)
   return inputs;
 }
 
-deque<reg> sort_outputs(deque<reg> in_deque)
-{
-  deque<reg> out_deque;
-  for (int i = 0); i < int(in_deque.size()); i++)
-  {
-    
-  }
-  return out_deque;
-}
-
 // prints the final output deque and their values
 void print_outputs(deque<reg> outputs)
 {
@@ -253,6 +243,23 @@ deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes)
   return new_nodes;
 }
 
+// sorts outputs to print in numerical order
+deque<reg> sort_outputs(deque<reg> in_deque, deque<string> output_names)
+{
+  deque<reg> out_deque;
+  reg current_reg;
+  
+  assert(output_names.size() == in_deque.size());
+  
+  for (int i = 0; i < int(in_deque.size()); i++)
+  {
+    current_reg = get_reg(in_deque, output_names[i]);
+    out_deque.push_back(current_reg);
+  }
+  
+  return out_deque;
+}
+
 // checks if the name is the name of an output node
 bool is_output(string name, deque<string> output_names)
 {
@@ -332,7 +339,7 @@ void print_output_names(deque<string> output_names)
 {
   for (int i = 0; i < int(output_names.size()); i++)
   {
-    cout << output_names[i] <<< endl;
+    cout << output_names[i] << endl;
   }
   
   return;
@@ -394,6 +401,7 @@ void simulate(vector<Node*> all_nodes, string input_filename, vector<Node*> POs)
   }
   
   outputs = create_output_nodes(nodes, output_names);
+  outputs = sort_outputs(outputs, output_names);
   print_outputs(outputs);
   
   return;

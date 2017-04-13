@@ -53,6 +53,9 @@ deque<reg> find_nodes(vector<Node*> &all_nodes, deque<reg> nodes);
 // checks if string is the name of an output node
 bool is_output(string name, deque<string> output_names);
 
+// sorts outputs to print in numerical order
+deque<reg> sort_outputs(deque<reg> in_deque, deque<string> output_names);
+
 // add the new nodes we have found into the larger node deque
 deque<reg> add_new_nodes(deque<reg> old_nodes, deque<reg> new_nodes, 
     int &num_output_nodes, deque<string> output_names);
